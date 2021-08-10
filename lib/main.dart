@@ -1,5 +1,6 @@
 import 'package:expenseplanner/transaction.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 void main() {
   runApp(MyApp());
@@ -76,20 +77,21 @@ class MyHomePage extends StatelessWidget {
                     Column(
                       children: [
                         Container(
-                          child: Text(e.title,
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-
-                          ),),
+                          child: Text(
+                            e.title,
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
                         ),
                         Container(
                           child: Text(
-                            e.date.toString(),
+                           DateFormat.yMd().format(e.date),
                             style: TextStyle(
                               color: Colors.grey,
-
-                            ),),
+                            ),
+                          ),
                         )
                       ],
                       crossAxisAlignment: CrossAxisAlignment.start,
