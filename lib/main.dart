@@ -30,6 +30,8 @@ class MyHomePage extends StatelessWidget {
     ),
     Transaction(id: 't2', title: 'old', amount: 22.22, date: DateTime.now())
   ];
+  String titleInput = '';
+  String amountInput = '';
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +40,7 @@ class MyHomePage extends StatelessWidget {
         title: Text("Flutter App"),
       ),
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Container(
@@ -47,6 +49,39 @@ class MyHomePage extends StatelessWidget {
               color: Colors.blue,
               elevation: 5.0,
               child: Text("Chart!"),
+            ),
+          ),
+          Container(
+            //margin: ,
+            padding: EdgeInsets.all(10),
+            child: Card(
+              elevation: 5,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  TextField(
+                    decoration: InputDecoration(labelText: 'Title'),
+                    onChanged: (value) {
+                      titleInput = value;
+                    },
+                  ),
+                  TextField(
+                    decoration: InputDecoration(labelText: 'Amount'),
+                    onChanged: (value) {
+                      amountInput = value;
+                    },
+                  ),
+                  TextButton(
+                      onPressed: () {
+                        print(titleInput);
+                        print(amountInput);
+                      },
+                      child: Text(
+                        'Add Transaction',
+                        style: TextStyle(color: Colors.purple),
+                      )),
+                ],
+              ),
             ),
           ),
           Column(
@@ -87,7 +122,7 @@ class MyHomePage extends StatelessWidget {
                         ),
                         Container(
                           child: Text(
-                           DateFormat.yMd().format(e.date),
+                            DateFormat.yMd().format(e.date),
                             style: TextStyle(
                               color: Colors.grey,
                             ),
