@@ -53,20 +53,22 @@ class MyHomePage extends StatelessWidget {
               return Card(
                 child: Row(
                   children: [
-                    Container(child: Text(e.amount.toString(),
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                      color: Colors.purple,
-
-                    ),),
-                    margin: EdgeInsets.symmetric(vertical: 10,horizontal: 50),
+                    Container(
+                      child: Text(
+                        '\$${e.amount}',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                          color: Colors.purple,
+                        ),
+                      ),
+                      margin:
+                          EdgeInsets.symmetric(vertical: 10, horizontal: 50),
                       decoration: BoxDecoration(
                         border: Border.all(
                           color: Colors.purple,
                           width: 2,
                           style: BorderStyle.solid,
-                          
                         ),
                       ),
                       padding: EdgeInsets.all(10),
@@ -74,12 +76,23 @@ class MyHomePage extends StatelessWidget {
                     Column(
                       children: [
                         Container(
-                          child: Text(e.title),
+                          child: Text(e.title,
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+
+                          ),),
                         ),
                         Container(
-                          child: Text(e.date.toString()),
+                          child: Text(
+                            e.date.toString(),
+                            style: TextStyle(
+                              color: Colors.grey,
+
+                            ),),
                         )
                       ],
+                      crossAxisAlignment: CrossAxisAlignment.start,
                     )
                   ],
                 ),
