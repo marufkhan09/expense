@@ -1,15 +1,11 @@
-
 import 'package:expenseplanner/models/transaction.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class TransactionList extends StatelessWidget {
-
   List<Transaction> transaction = [];
 
   TransactionList(this.transaction);
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -27,8 +23,7 @@ class TransactionList extends StatelessWidget {
                     color: Colors.purple,
                   ),
                 ),
-                margin:
-                EdgeInsets.symmetric(vertical: 10, horizontal: 50),
+                margin: EdgeInsets.symmetric(vertical: 10, horizontal: 50),
                 decoration: BoxDecoration(
                   border: Border.all(
                     color: Colors.purple,
