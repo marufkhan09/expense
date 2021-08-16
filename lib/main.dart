@@ -14,7 +14,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter ',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.orange,
+        accentColor: Colors.amber,
       ),
       home: MyHomePage(),
     );
@@ -72,7 +73,7 @@ class _MyHomePageState extends State<MyHomePage> {
               onPressed: () => _startAddNewTransaction(context),
               icon: Icon(Icons.add)),
         ],
-        title: Text("Flutter App"),
+        title: Text("Personal Expense"),
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
