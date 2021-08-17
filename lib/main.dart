@@ -14,9 +14,20 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter ',
       theme: ThemeData(
-        primarySwatch: Colors.orange,
-        accentColor: Colors.amber,
-      ),
+          primarySwatch: Colors.orange,
+          accentColor: Colors.amber,
+          textTheme: ThemeData.light().textTheme.copyWith(
+            headline6: TextStyle(
+              fontSize: 18,
+              fontFamily: 'OpenSans',
+              fontWeight: FontWeight.bold,
+            )
+          ),
+          fontFamily: 'Quicksand',
+          appBarTheme: AppBarTheme(
+              textTheme: ThemeData.light().textTheme.copyWith(
+                  headline6: TextStyle(fontFamily: 'OpenSans', fontSize: 20,fontWeight: FontWeight.bold)))),
+
       home: MyHomePage(),
     );
   }
@@ -36,19 +47,20 @@ class _MyHomePageState extends State<MyHomePage> {
         context: context,
         builder: (_) {
           return GestureDetector(
-            behavior: HitTestBehavior.opaque,
-              onTap: () {}, child: NewTransaction(_addNewTransaction));
+              behavior: HitTestBehavior.opaque,
+              onTap: () {},
+              child: NewTransaction(_addNewTransaction));
         });
   }
 
   final List<Transaction> _userTransaction = [
-    Transaction(
-      id: 't1',
-      title: 'new',
-      amount: 69.99,
-      date: DateTime.now(),
-    ),
-    Transaction(id: 't2', title: 'old', amount: 22.22, date: DateTime.now())
+    // Transaction(
+    //   id: 't1',
+    //   title: 'new',
+    //   amount: 69.99,
+    //   date: DateTime.now(),
+    // ),
+    // Transaction(id: 't2', title: 'old', amount: 22.22, date: DateTime.now())
   ];
 
   void _addNewTransaction(String txTitle, double txAmount) {
@@ -73,7 +85,9 @@ class _MyHomePageState extends State<MyHomePage> {
               onPressed: () => _startAddNewTransaction(context),
               icon: Icon(Icons.add)),
         ],
-        title: Text("Personal Expense"),
+        title: Text(
+          "Personal Expense",
+        ),
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
