@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter ',
       theme: ThemeData(
-          primarySwatch: Colors.purple,
+          primarySwatch: Colors.teal,
           accentColor: Colors.amber,
           textTheme: ThemeData.light().textTheme.copyWith(
                   headline6: TextStyle(
@@ -96,13 +96,15 @@ class _MyHomePageState extends State<MyHomePage> {
           "Personal Expense",
         ),
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Chart(_recentTransactions),
-          TransactionList(_userTransaction,_deleteNewTranscation),
-        ],
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Chart(_recentTransactions),
+            TransactionList(_userTransaction,_deleteNewTranscation),
+          ],
+        ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton(
