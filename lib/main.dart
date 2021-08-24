@@ -56,37 +56,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   final List<Transaction> _userTransaction = [
-    Transaction(
-      id: 't1',
-      title: 'new',
-      amount: 59.99,
-      date: DateTime.now().subtract(Duration(days: 1)),
-    ),    Transaction(
-      id: 't1',
-      title: 'new',
-      amount: 49.99,
-      date: DateTime.now().subtract(Duration(days: 2)),
-    ),    Transaction(
-      id: 't1',
-      title: 'new',
-      amount: 39.99,
-      date: DateTime.now().subtract(Duration(days: 3)),
-    ),    Transaction(
-      id: 't1',
-      title: 'new',
-      amount: 29.99,
-      date: DateTime.now().subtract(Duration(days: 4)),
-    ),    Transaction(
-      id: 't1',
-      title: 'new',
-      amount: 19.99,
-      date: DateTime.now().subtract(Duration(days: 5)),
-    ),    Transaction(
-      id: 't1',
-      title: 'new',
-      amount: 9.99,
-      date: DateTime.now().subtract(Duration(days: 6)),
-    ),
+
   ];
 
   List<Transaction> get _recentTransactions {
@@ -94,12 +64,12 @@ class _MyHomePageState extends State<MyHomePage> {
         element.date.isAfter(DateTime.now().subtract(Duration(days: 7)))).toList();
   }
 
-  void _addNewTransaction(String txTitle, double txAmount) {
+  void _addNewTransaction(String txTitle, double txAmount,DateTime chosenDate) {
     final newTx = Transaction(
         id: DateTime.now().toString(),
         title: txTitle,
         amount: txAmount,
-        date: DateTime.now());
+        date: chosenDate,);
 
     setState(() {
       _userTransaction.add(newTx);
