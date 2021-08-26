@@ -69,41 +69,55 @@ class _NewTransactionState extends State<NewTransaction> {
           child: Row(
             children: [
               Expanded(
-                child: Text(_selectedDate == null
-                    ? 'No Date Chosen'
-                    : 'Picked Date : ${DateFormat.yMd().format(_selectedDate!)}'),
+                child: Text(
+                  _selectedDate == null
+                      ? 'No Date Chosen'
+                      : 'Picked Date : ${DateFormat.yMd().format(_selectedDate!)}',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ),
               Container(
-                margin: EdgeInsets.symmetric(horizontal: 10, vertical: 0),
+                height: 35,
+                margin: EdgeInsets.symmetric(horizontal: 15, vertical: 0),
+                decoration: BoxDecoration(
+                  color: Colors.cyan[400],
+                  borderRadius: BorderRadius.all(Radius.circular(5)),
+                ),
                 child: TextButton(
                     onPressed: _presentDatePicker,
                     child: Text(
                       'Choose Date',
                       style: TextStyle(
-                          color: Theme.of(context).accentColor,
+                          color: Colors.white,
                           fontWeight: FontWeight.bold),
                     )),
               ),
             ],
           ),
         ),
-        Container(
-          // color: Colors.purple,
-          height: 40,
-          width: 140,
-          decoration: BoxDecoration(
-            color: Colors.purple,
-            borderRadius: BorderRadius.all(Radius.circular(30)),
+        SizedBox(height: 20,),
+        Center(
+          child: Container(
+            // color: Colors.purple,
+            height: 40,
+            width: 140,
+            decoration: BoxDecoration(
+              color: Colors.cyan[400],
+              borderRadius: BorderRadius.all(Radius.circular(5)),
+            ),
+            margin: EdgeInsets.symmetric(horizontal: 10, vertical: 0),
+            child: TextButton(
+                onPressed: () {
+                  _submitData();
+                },
+                child: Text(
+                  'Add Transaction',
+                  style: TextStyle(color: Colors.white),
+                )),
           ),
-          margin: EdgeInsets.symmetric(horizontal: 10, vertical: 0),
-          child: TextButton(
-              onPressed: () {
-                _submitData();
-              },
-              child: Text(
-                'Add Transaction',
-                style: TextStyle(color: Colors.white),
-              )),
         ),
       ]),
     );

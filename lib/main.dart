@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter ',
       theme: ThemeData(
           primarySwatch: Colors.teal,
-          accentColor: Colors.amber,
+          accentColor: Colors.cyan,
           textTheme: ThemeData.light().textTheme.copyWith(
                   headline6: TextStyle(
                 fontSize: 18,
@@ -76,7 +76,7 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-  void _deleteNewTranscation(String id){
+  void _deleteNewTransaction(String id){
   setState(() {
     _userTransaction.removeWhere((tx) => tx.id == id);
   });
@@ -102,7 +102,7 @@ class _MyHomePageState extends State<MyHomePage> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Chart(_recentTransactions),
-            TransactionList(_userTransaction,_deleteNewTranscation),
+            TransactionList(_userTransaction,_deleteNewTransaction),
           ],
         ),
       ),

@@ -13,11 +13,11 @@ class ChartBar extends StatelessWidget {
       children: [
         Text(label),
         SizedBox(
-          height: 4,
+          height: 15,
         ),
         Container(
-          height: 60,
-          width: 10,
+          height: 100,
+          width: 15,
           child: Stack(
             alignment: AlignmentDirectional.bottomStart,
             children: [
@@ -25,14 +25,14 @@ class ChartBar extends StatelessWidget {
                 decoration: BoxDecoration(
                   border: Border.all(color: Colors.blue, width: 2.0),
                   color: Colors.greenAccent,
-                  borderRadius: BorderRadius.circular(5),
+                  borderRadius: BorderRadius.circular(10),
                 ),
               ),
               FractionallySizedBox(
                 heightFactor: spendingPctOfTotal,
                 child: Container(
                   decoration: BoxDecoration(
-                    color: Colors.red,
+                    color: Theme.of(context).errorColor,
                     borderRadius: BorderRadius.circular(10),
                   ),
                 ),
@@ -41,9 +41,14 @@ class ChartBar extends StatelessWidget {
           ),
         ),
         SizedBox(
-          height: 4,
+          height: 15,
         ),
-        FittedBox(child: Text('\$${spendingAmount.toStringAsFixed(0)}')),
+        FittedBox(
+          child: Text(
+            '\$${spendingAmount.toStringAsFixed(0)}',
+            style: TextStyle(fontSize: 16),
+          ),
+        ),
       ],
     );
   }
