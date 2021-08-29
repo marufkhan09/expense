@@ -50,76 +50,82 @@ class _NewTransactionState extends State<NewTransaction> {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 5,
-      child: Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
-        TextField(
-          decoration: InputDecoration(labelText: 'Title'),
-          controller: _titleController,
-          onSubmitted: (_) => _submitData(),
-        ),
-        TextField(
-          decoration: InputDecoration(labelText: 'Amount'),
-          controller: _amountController,
-          keyboardType: TextInputType.numberWithOptions(decimal: true),
-          onSubmitted: (_) => _submitData(),
-        ),
-        Container(
-          height: 70,
-          child: Row(
-            children: [
-              Expanded(
-                child: Text(
-                  _selectedDate == null
-                      ? 'No Date Chosen'
-                      : 'Picked Date : ${DateFormat.yMd().format(_selectedDate!)}',
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
+    return SingleChildScrollView(
+      child: Card(
+
+        elevation: 5,
+        child: Container(
+          padding: EdgeInsets.only(top: 10,right: 10,left: 10, bottom: MediaQuery.of(context).viewInsets.bottom + 10),
+          child: Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
+            TextField(
+              decoration: InputDecoration(labelText: 'Title'),
+              controller: _titleController,
+              onSubmitted: (_) => _submitData(),
+            ),
+            TextField(
+              decoration: InputDecoration(labelText: 'Amount'),
+              controller: _amountController,
+              keyboardType: TextInputType.numberWithOptions(decimal: true),
+              onSubmitted: (_) => _submitData(),
+            ),
+            Container(
+              height: 70,
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Text(
+                      _selectedDate == null
+                          ? 'No Date Chosen!'
+                          : 'Picked Date : ${DateFormat.yMd().format(_selectedDate!)}',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                   ),
-                ),
+                  Container(
+                    height: 35,
+                    margin: EdgeInsets.symmetric(horizontal: 15, vertical: 0),
+                    decoration: BoxDecoration(
+                      color: Colors.cyan[400],
+                      borderRadius: BorderRadius.all(Radius.circular(5)),
+                    ),
+                    child: TextButton(
+                        onPressed: _presentDatePicker,
+                        child: Text(
+                          'Choose Date',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold),
+                        )),
+                  ),
+                ],
               ),
-              Container(
-                height: 35,
-                margin: EdgeInsets.symmetric(horizontal: 15, vertical: 0),
+            ),
+            SizedBox(height: 20,),
+            Center(
+              child: Container(
+                // color: Colors.purple,
+                height: 40,
+                width: 140,
                 decoration: BoxDecoration(
                   color: Colors.cyan[400],
                   borderRadius: BorderRadius.all(Radius.circular(5)),
                 ),
+                margin: EdgeInsets.symmetric(horizontal: 10, vertical: 0),
                 child: TextButton(
-                    onPressed: _presentDatePicker,
+                    onPressed: () {
+                      _submitData();
+                    },
                     child: Text(
-                      'Choose Date',
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold),
+                      'Add Transaction',
+                      style: TextStyle(color: Colors.white),
                     )),
               ),
-            ],
-          ),
-        ),
-        SizedBox(height: 20,),
-        Center(
-          child: Container(
-            // color: Colors.purple,
-            height: 40,
-            width: 140,
-            decoration: BoxDecoration(
-              color: Colors.cyan[400],
-              borderRadius: BorderRadius.all(Radius.circular(5)),
             ),
-            margin: EdgeInsets.symmetric(horizontal: 10, vertical: 0),
-            child: TextButton(
-                onPressed: () {
-                  _submitData();
-                },
-                child: Text(
-                  'Add Transaction',
-                  style: TextStyle(color: Colors.white),
-                )),
-          ),
+          ]),
         ),
-      ]),
+      ),
     );
   }
 }
