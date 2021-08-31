@@ -99,7 +99,7 @@ class _MyHomePageState extends State<MyHomePage> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 GestureDetector(
-                  onTap: () => _startAddNewTransaction,
+                  onTap: () => _startAddNewTransaction(context),
                   child: Icon(CupertinoIcons.add),
                 )
               ],
@@ -123,7 +123,7 @@ class _MyHomePageState extends State<MyHomePage> {
             0.7,
         child: TransactionList(_userTransaction, _deleteNewTransaction));
 
-    final pageBody = SingleChildScrollView(
+    final pageBody = SafeArea(child: SingleChildScrollView(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -132,7 +132,8 @@ class _MyHomePageState extends State<MyHomePage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text('Show Chart'),
+                Text('Show Chart',
+                style: Theme.of(context).textTheme.headline6,),
                 Switch.adaptive(
                   value: _showChart,
                   onChanged: (value) {
@@ -146,23 +147,23 @@ class _MyHomePageState extends State<MyHomePage> {
           if (!isLandscape)
             Container(
                 height: (mediaQuery.size.height -
-                        appBar.preferredSize.height -
-                        mediaQuery.padding.top) *
+                    appBar.preferredSize.height -
+                    mediaQuery.padding.top) *
                     0.3,
                 child: Chart(_recentTransactions)),
           if (!isLandscape) txListWidget,
           if (isLandscape)
             _showChart
                 ? Container(
-                    height: (mediaQuery.size.height -
-                            appBar.preferredSize.height -
-                            mediaQuery.padding.top) *
-                        0.7,
-                    child: Chart(_recentTransactions))
+                height: (mediaQuery.size.height -
+                    appBar.preferredSize.height -
+                    mediaQuery.padding.top) *
+                    0.7,
+                child: Chart(_recentTransactions))
                 : txListWidget,
         ],
       ),
-    );
+    ));
 
     return Platform.isIOS
         ? CupertinoPageScaffold(

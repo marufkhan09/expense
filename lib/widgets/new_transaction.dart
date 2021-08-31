@@ -1,3 +1,5 @@
+import 'dart:io';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -33,41 +35,92 @@ class _NewTransactionState extends State<NewTransaction> {
   }
 
   void _presentDatePicker() {
-    showDatePicker(
-            context: context,
-            initialDate: DateTime.now(),
-            firstDate: DateTime(2019),
-            lastDate: DateTime.now())
-        .then((pickedDate) {
-      if (pickedDate == null) {
-        return;
-      }
-      setState(() {
-        _selectedDate = pickedDate;
-      });
-    });
+    Platform.isIOS
+        ? showCupertinoModalPopup(
+        context: context,
+        builder: (_) => Container(
+      height: 500,
+      color: Color.fromARGB(255, 255, 255, 255),
+      child: Column(
+        children: [
+          Container(
+            height: 400,
+            child: CupertinoDatePicker(
+              mode: CupertinoDatePickerMode.date,
+                minimumYear: 2019,
+                maximumYear: DateTime.now().year,
+                initialDateTime: DateTime.now(),
+                onDateTimeChanged: (val) {
+                  setState(() {
+                    _selectedDate = val;
+                  });
+                }),
+          ),
+
+          // Close the modal
+          CupertinoButton(
+            child: Text('OK'),
+            onPressed: () => Navigator.of(context).pop(),
+          )
+        ],
+      ),
+    ))
+        : showDatePicker(
+                context: context,
+                initialDate: DateTime.now(),
+                firstDate: DateTime(2019),
+                lastDate: DateTime.now())
+            .then((pickedDate) {
+            if (pickedDate == null) {
+              return;
+            }
+            setState(() {
+              _selectedDate = pickedDate;
+            });
+          });
   }
 
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Card(
-
-        elevation: 5,
+        elevation: 10,
         child: Container(
-          padding: EdgeInsets.only(top: 10,right: 10,left: 10, bottom: MediaQuery.of(context).viewInsets.bottom + 10),
+          padding: EdgeInsets.only(
+              top: 10,
+              right: 10,
+              left: 10,
+              bottom: MediaQuery.of(context).viewInsets.bottom + 10),
           child: Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
-            TextField(
-              decoration: InputDecoration(labelText: 'Title'),
-              controller: _titleController,
-              onSubmitted: (_) => _submitData(),
+            Platform.isIOS
+                ? CupertinoTextField(
+                    padding: EdgeInsets.all(15),
+                    placeholder: "Title",
+                    controller: _titleController,
+                    onSubmitted: (_) => _submitData(),
+                  )
+                : TextField(
+                    decoration: InputDecoration(labelText: 'Title'),
+                    controller: _titleController,
+                    onSubmitted: (_) => _submitData(),
+                  ),
+            SizedBox(
+              height: 10,
             ),
-            TextField(
-              decoration: InputDecoration(labelText: 'Amount'),
-              controller: _amountController,
-              keyboardType: TextInputType.numberWithOptions(decimal: true),
-              onSubmitted: (_) => _submitData(),
-            ),
+            Platform.isIOS
+                ? CupertinoTextField(
+                    padding: EdgeInsets.all(15),
+                    placeholder: "Amount",
+                    controller: _amountController,
+                    onSubmitted: (_) => _submitData(),
+                  )
+                : TextField(
+                    decoration: InputDecoration(labelText: 'Amount'),
+                    controller: _amountController,
+                    keyboardType:
+                        TextInputType.numberWithOptions(decimal: true),
+                    onSubmitted: (_) => _submitData(),
+                  ),
             Container(
               height: 70,
               child: Row(
@@ -84,43 +137,53 @@ class _NewTransactionState extends State<NewTransaction> {
                     ),
                   ),
                   Container(
-                    height: 35,
-                    margin: EdgeInsets.symmetric(horizontal: 15, vertical: 0),
+                    height: 48,
+                    margin: EdgeInsets.symmetric(horizontal: 10, vertical: 0),
                     decoration: BoxDecoration(
                       color: Colors.cyan[400],
-                      borderRadius: BorderRadius.all(Radius.circular(5)),
+                      borderRadius: BorderRadius.all(Radius.circular(35)),
                     ),
                     child: TextButton(
                         onPressed: _presentDatePicker,
                         child: Text(
                           'Choose Date',
                           style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold),
+                              color: Colors.white, fontWeight: FontWeight.bold),
                         )),
                   ),
                 ],
               ),
             ),
-            SizedBox(height: 20,),
+            SizedBox(
+              height: 20,
+            ),
             Center(
               child: Container(
                 // color: Colors.purple,
-                height: 40,
+                height: 48,
                 width: 140,
                 decoration: BoxDecoration(
                   color: Colors.cyan[400],
-                  borderRadius: BorderRadius.all(Radius.circular(5)),
+                  borderRadius: BorderRadius.all(Radius.circular(45)),
                 ),
-                margin: EdgeInsets.symmetric(horizontal: 10, vertical: 0),
-                child: TextButton(
-                    onPressed: () {
-                      _submitData();
-                    },
-                    child: Text(
-                      'Add Transaction',
-                      style: TextStyle(color: Colors.white),
-                    )),
+                child: Platform.isIOS
+                    ? CupertinoButton(
+                        child: Text(
+                          'Add Transaction',
+                          style: TextStyle(color: Colors.white, fontSize: 14),
+                        ),
+                        onPressed: () {
+                          _submitData();
+                        },
+                      )
+                    : TextButton(
+                        onPressed: () {
+                          _submitData();
+                        },
+                        child: Text(
+                          'Add Transaction',
+                          style: TextStyle(color: Colors.white),
+                        )),
               ),
             ),
           ]),
