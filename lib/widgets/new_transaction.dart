@@ -37,34 +37,34 @@ class _NewTransactionState extends State<NewTransaction> {
   void _presentDatePicker() {
     Platform.isIOS
         ? showCupertinoModalPopup(
-        context: context,
-        builder: (_) => Container(
-      height: 500,
-      color: Color.fromARGB(255, 255, 255, 255),
-      child: Column(
-        children: [
-          Container(
-            height: 400,
-            child: CupertinoDatePicker(
-              mode: CupertinoDatePickerMode.date,
-                minimumYear: 2019,
-                maximumYear: DateTime.now().year,
-                initialDateTime: DateTime.now(),
-                onDateTimeChanged: (val) {
-                  setState(() {
-                    _selectedDate = val;
-                  });
-                }),
-          ),
+            context: context,
+            builder: (_) => Container(
+                  height: 500,
+                  color: Color.fromARGB(255, 255, 255, 255),
+                  child: Column(
+                    children: [
+                      Container(
+                        height: 400,
+                        child: CupertinoDatePicker(
+                            mode: CupertinoDatePickerMode.date,
+                            minimumYear: 2019,
+                            maximumYear: DateTime.now().year,
+                            initialDateTime: DateTime.now(),
+                            onDateTimeChanged: (val) {
+                              setState(() {
+                                _selectedDate = val;
+                              });
+                            }),
+                      ),
 
-          // Close the modal
-          CupertinoButton(
-            child: Text('OK'),
-            onPressed: () => Navigator.of(context).pop(),
-          )
-        ],
-      ),
-    ))
+                      // Close the modal
+                      CupertinoButton(
+                        child: Text('OK'),
+                        onPressed: () => Navigator.of(context).pop(),
+                      )
+                    ],
+                  ),
+                ))
         : showDatePicker(
                 context: context,
                 initialDate: DateTime.now(),
@@ -136,21 +136,33 @@ class _NewTransactionState extends State<NewTransaction> {
                       ),
                     ),
                   ),
-                  Container(
-                    height: 48,
-                    margin: EdgeInsets.symmetric(horizontal: 10, vertical: 0),
-                    decoration: BoxDecoration(
-                      color: Colors.cyan[400],
-                      borderRadius: BorderRadius.all(Radius.circular(35)),
-                    ),
-                    child: TextButton(
-                        onPressed: _presentDatePicker,
-                        child: Text(
-                          'Choose Date',
-                          style: TextStyle(
-                              color: Colors.white, fontWeight: FontWeight.bold),
-                        )),
-                  ),
+                  Platform.isIOS
+                      ? CupertinoButton(
+                          child: Text(
+                            'Choose Date',
+                            style: TextStyle(color: Colors.blue),
+                          ),
+                          onPressed: () {
+                            _presentDatePicker();
+                          },
+                        )
+                      : Container(
+                          height: 48,
+                          margin:
+                              EdgeInsets.symmetric(horizontal: 10, vertical: 0),
+                          decoration: BoxDecoration(
+                            color: Colors.cyan[400],
+                            borderRadius: BorderRadius.all(Radius.circular(35)),
+                          ),
+                          child: TextButton(
+                              onPressed: _presentDatePicker,
+                              child: Text(
+                                'Choose Date',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold),
+                              )),
+                        ),
                 ],
               ),
             ),
@@ -158,33 +170,33 @@ class _NewTransactionState extends State<NewTransaction> {
               height: 20,
             ),
             Center(
-              child: Container(
-                // color: Colors.purple,
-                height: 48,
-                width: 140,
-                decoration: BoxDecoration(
-                  color: Colors.cyan[400],
-                  borderRadius: BorderRadius.all(Radius.circular(45)),
-                ),
-                child: Platform.isIOS
-                    ? CupertinoButton(
-                        child: Text(
-                          'Add Transaction',
-                          style: TextStyle(color: Colors.white, fontSize: 14),
-                        ),
-                        onPressed: () {
-                          _submitData();
-                        },
-                      )
-                    : TextButton(
-                        onPressed: () {
-                          _submitData();
-                        },
-                        child: Text(
-                          'Add Transaction',
-                          style: TextStyle(color: Colors.white),
-                        )),
-              ),
+              child: Platform.isIOS
+                  ? CupertinoButton(
+                      child: Text(
+                        'Add Transaction',
+                        style: TextStyle(color: Colors.blue),
+                      ),
+                      onPressed: () {
+                        _submitData();
+                      },
+                    )
+                  : Container(
+                      // color: Colors.purple,
+                      height: 48,
+                      width: 140,
+                      decoration: BoxDecoration(
+                        color: Colors.cyan[400],
+                        borderRadius: BorderRadius.all(Radius.circular(45)),
+                      ),
+                      child: TextButton(
+                          onPressed: () {
+                            _submitData();
+                          },
+                          child: Text(
+                            'Add Transaction',
+                            style: TextStyle(color: Colors.white),
+                          )),
+                    ),
             ),
           ]),
         ),
